@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Shitov Neuronet- Интеллектуальный ассистент</title>
+  <link rel="stylesheet" href="https://gist.github.com/sheef-script/68b36c9c3342d9c1d9f4ed2c1af6d019">
+  <style>
+    :root {
+      --primary: #6c5ce7;
+      --secondary: #a29bfe;
+      --dark: #2d3436;
+      --light: #f5f6fa;
+      --accent: #00cec9;
+      --danger: #d63031;
+      --success: #00b894;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: var(--dark);
+      background-color: var(--light);
+      overflow-x: hidden;
+    }
+    }
+
+    /* Анимации */
+    .hero {
+      /* ... остальные стили ... */
+      background: linear-gradient(-45deg, #6c5ce7, #a29bfe, #00cec9, #00b894);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+    }
+
+    @keyframes gradientBG {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    }
+
+    feature-card,
+    .template-card,
+    .demo-card {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease-out;
+    }
+
+    feature-card.visible,
+    .template-card.visible,
+    .demo-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes gradientBG {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* Шапка */
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 1rem 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo i {
+      margin-right: 10px;
+      color: var(--accent);
+    }
+
+    /* Навигация */
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+
+    nav ul li {
+      margin-left: 2rem;
+      position: relative;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+    }
+
+    nav ul li a:hover {
+      color: var(--accent);
+    }
+
+    nav ul li a i {
+      margin-right: 8px;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Герой-секция */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(-45deg, #6c5ce7, #a29bfe, #00cec9, #00b894);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: white;
+      padding-top: 80px;
+    }
+
+    .hero-container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero-content {
+      animation: fadeIn 1s ease-out;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    .hero-image {
+      position: relative;
+      animation: fadeIn 1s ease-out 0.3s both;
+    }
+
+    .hero-image img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      background: white;
+      color: var(--primary);
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+      margin-left: 1rem;
+    }
+
+    /* Демо нейросети */
+    .ai-demo {
+      padding: 5rem 0;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      color: var(--dark);
+      margin-bottom: 1rem;
+    }
+
+    .section-title p {
+      color: #666;
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .demo-container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .demo-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .demo-header {
+      background: var(--primary);
+      color: white;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .demo-header i {
+      margin-right: 10px;
+      font-size: 1.2rem;
+    }
+
+    .demo-body {
+      padding: 1.5rem;
+    }
+
+    .chat-container {
+      height: 500px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem;
+      background: #f9f9f9;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .message {
+      margin-bottom: 1rem;
+      max-width: 80%;
+      padding: 0.8rem 1rem;
+      border-radius: 15px;
+      line-height: 1.4;
+      position: relative;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .user-message {
+      background: var(--primary);
+      color: white;
+      margin-left: auto;
+      border-bottom-right-radius: 5px;
+    }
+
+    .ai-message {
+      background: white;
+      color: var(--dark);
+      border: 1px solid #eee;
+      margin-right: auto;
+      border-bottom-left-radius: 5px;
+    }
+
+    .chat-input {
+      display: flex;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 0.8rem 1rem;
+      border: 1px solid #ddd;
+      border-radius: 50px 0 0 50px;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .chat-input button {
+      padding: 0 1.5rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 0 50px 50px 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .chat-input button:hover {
+      background: var(--accent);
+    }
+
+    .typing-indicator {
+      display: none;
+      margin-bottom: 1rem;
+    }
+
+    .typing-indicator span {
+      height: 10px;
+      width: 10px;
+      background: #ccc;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 5px;
+      animation: typingAnimation 1.5s infinite ease-in-out;
+    }
+
+    .typing-indicator span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .typing-indicator span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes typingAnimation {
+
+      0%,
+      100% {
+        transform: translateY(0);
+        opacity: 0.5;
+      }
+
+      50% {
+        transform: translateY(-5px);
+        opacity: 1;
+      }
+    }
+
+    /* Шаблоны вопросов */
+    .templates-section {
+      padding: 3rem 0;
+      background: white;
+    }
+
+    .templates-container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .template-categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .category-btn {
+      padding: 0.5rem 1rem;
+      background: var(--light);
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .category-btn.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    .template-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .template-card {
+      background: var(--light);
+      border-radius: 10px;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px solid #eee;
+    }
+
+    .template-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .template-card h4 {
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    /* Адаптивность */
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: var(--primary);
+        flex-direction: column;
+        padding: 1rem 0;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      nav ul.show {
+        display: flex;
+      }
+
+      nav ul li {
+        margin: 0;
+        padding: 0.8rem 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-image {
+        margin-top: 2rem;
+      }
+
+      .btn-outline {
+        margin-left: 0;
+        margin-top: 1rem;
+        display: block;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Шапка -->
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <i class="fas fa-brain"></i>
+        <span>Shitov Neuronet</span>
+      </div>
+      <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <i class="fas fa-bars"></i>
+      </button>
+      <nav>
+        <ul id="navMenu">
+          <li><a href="#home"><i class="fas fa-home"></i> Главная</a></li>
+          <li><a href="#demo"><i class="fas fa-robot"></i> Демо</a></li>
+          <li><a href="#templates"><i class="fas fa-lightbulb"></i> Шаблоны</a></li>
+
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Герой-секция -->
+  <section class="hero" id="home">
+    <div class="hero-container">
+      <div class="hero-content">
+        <h1>Интеллектуальный ассистент с шаблонами ответов</h1>
+        <p>Мощная нейросеть с предустановленными шаблонами для быстрых и точных ответов на ваши вопросы.</p>
+        <div>
+          <a href="#demo" class="btn btn-primary">Попробовать демо</a>
+          <a href="#templates" class="btn btn-outline">Шаблоны вопросов</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Демо нейросети -->
+  <section class="ai-demo" id="demo">
+    <div class="section-title">
+      <h2>Демо нейросети</h2>
+      <p>Пообщайтесь с нашим ИИ-ассистентом. Попробуйте задать один из шаблонных вопросов.</p>
+    </div>
+    <div class="demo-container">
+      <div class="demo-card">
+        <div class="demo-header">
+          <i class="fas fa-robot"></i>
+          <span>Чат с Shitov Neuronet</span>
+        </div>
+        <div class="demo-body">
+          <div class="chat-container">
+            <div class="chat-messages" id="chatMessages">
+              <div class="message ai-message">
+                Привет! Я Shitov Neuronet - интеллектуальный ассистент. Вы можете задать мне вопрос или выбрать один из шаблонов ниже.
+              </div>
+            </div>
+            <div class="typing-indicator" id="typingIndicator">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class="chat-input">
+              <input type="text" id="userInput" placeholder="Введите ваше сообщение...">
+              <button id="sendButton"><i class="fas fa-paper-plane"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Шаблоны вопросов -->
+  <section class="templates-section" id="templates">
+    <div class="section-title">
+      <h2>Шаблоны вопросов и ответов</h2>
+      <p>Выберите категорию и используйте готовые шаблоны для быстрого общения с нейросетью</p>
+    </div>
+    <div class="templates-container">
+      <div class="template-categories" id="categories">
+        <!-- Категории будут добавлены через JS -->
+      </div>
+      <div class="template-grid" id="templateGrid">
+        <!-- Шаблоны будут добавлены через JS -->
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Мобильное меню
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navMenu = document.getElementById('navMenu');
+    mobileMenuBtn.addEventListener('click', () => {
+      navMenu.classList.toggle('show');
+    });
+    // Плавная прокрутка
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (navMenu.classList.contains('show')) {
+          navMenu.classList.remove('show');
+        }
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+    // ========== СИСТЕМА ВОПРОСОВ И ОТВЕТОВ ==========
+    // 1. База знаний с категориями
+    const knowledgeBase = {
+      categories: ['Все', 'Приветствие', 'О компании', 'Технологии', 'Помощь', 'Разное'],
+      templates: [{
+          question: "Привет! Как дела?",
+          answer: "Приветствую! У меня всё отлично, я же программа! А как ваши дела?",
+          category: "Приветствие",
+          keywords: ["привет", "здравствуйте", "добрый день", "как дела"]
+        },
+        {
+          question: "Что ты умеешь?",
+          answer: "Я могу отвечать на вопросы, анализировать текст, давать рекомендации и поддерживать беседу. Мои возможности постоянно расширяются!",
+          category: "О компании",
+          keywords: ["функции", "возможности", "умения", "умеешь"]
+        },
+        {
+          question: "Какие технологии вы используете?",
+          answer: "Мы работаем с современными нейросетевыми архитектурами, включая трансформеры, CNN и RNN. Основные технологии: Python, Html, PyTorch.",
+          category: "Технологии",
+          keywords: ["технологии", "архитектура", "фреймворки", "алгоритмы"]
+        },
+        {
+          question: "Как вас зовут?",
+          answer: "Я - Shitov Neuronet, ваш цифровой ассистент. Рад знакомству!",
+          category: "Приветствие",
+          keywords: ["имя", "зовут", "представься"]
+        },
+        {
+          question: "Помоги мне с проблемой",
+          answer: "Конечно, опишите вашу проблему подробнее, и я постараюсь помочь.",
+          category: "Помощь",
+          keywords: ["помощь", "проблема", "не работает", "сломалось"]
+        },
+        {
+          question: "Что нового?",
+          answer: "Недавно мы обновили мою языковую модель, теперь я понимаю контекст ещё лучше!",
+          category: "Разное",
+          keywords: ["новое", "обновления", "новинки"]
+        },
+        {
+          question: "Расскажи о компании",
+          answer: "Мы - компания разработчиков AI-решений с 2025 года. Специализируемся на нейросетевых технологиях и машинном обучении.",
+          category: "О компании",
+          keywords: ["компания", "о вас", "информация"]
+        }
+      ]
+    };
+    // 2. Инициализация шаблонов
+    function initTemplates() {
+      const categoriesContainer = document.getElementById('categories');
+      const templateGrid = document.getElementById('templateGrid');
+      // Добавляем категории
+      knowledgeBase.categories.forEach(category => {
+        const btn = document.createElement('button');
+        btn.className = 'category-btn';
+        btn.textContent = category;
+        btn.dataset.category = category;
+        btn.addEventListener('click', filterTemplates);
+        categoriesContainer.appendChild(btn);
+      });
+      // Активируем первую категорию
+      categoriesContainer.children[0].classList.add('active');
+      // Отображаем все шаблоны
+      renderTemplates(knowledgeBase.templates);
+    }
+    // 3. Фильтрация шаблонов по категориям
+    function filterTemplates(e) {
+      const category = e.target.dataset.category;
+      // Обновляем активную кнопку
+      document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      e.target.classList.add('active');
+      // Фильтруем шаблоны
+      if (category === 'Все') {
+        renderTemplates(knowledgeBase.templates);
+      } else {
+        const filtered = knowledgeBase.templates.filter(t => t.category === category);
+        renderTemplates(filtered);
+      }
+    }
+    // 4. Рендер шаблонов
+    function renderTemplates(templates) {
+      const templateGrid = document.getElementById('templateGrid');
+      templateGrid.innerHTML = '';
+      templates.forEach(template => {
+        const card = document.createElement('div');
+        card.className = 'template-card';
+        card.innerHTML = `
+                    <h4>${template.question}</h4>
+                    <p>${template.answer.substring(0, 80)}...</p>
+                `;
+        card.addEventListener('click', () => {
+          useTemplate(template);
+        });
+        templateGrid.appendChild(card);
+      });
+    }
+    // 5. Использование шаблона
+    function useTemplate(template) {
+      const userInput = document.getElementById('userInput');
+      userInput.value = template.question;
+      userInput.focus();
+    }
+    // 6. Чат с нейросетью
+    const chatMessages = document.getElementById('chatMessages');
+    const userInput = document.getElementById('userInput');
+    const sendButton = document.getElementById('sendButton');
+    const typingIndicator = document.getElementById('typingIndicator');
+
+    function addMessage(text, isUser) {
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('message');
+      messageDiv.classList.add(isUser ? 'user-message' : 'ai-message');
+      messageDiv.textContent = text;
+      chatMessages.appendChild(messageDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function findBestAnswer(question) {
+      // Приводим к нижнему регистру для поиска
+      const lowerQuestion = question.toLowerCase();
+      // 1. Ищем точное совпадение по вопросам
+      const exactMatch = knowledgeBase.templates.find(t =>
+        t.question.toLowerCase() === lowerQuestion
+      );
+      if (exactMatch) return exactMatch.answer;
+      // 2. Ищем по ключевым словам
+      for (const template of knowledgeBase.templates) {
+        for (const keyword of template.keywords) {
+          if (lowerQuestion.includes(keyword.toLowerCase())) {
+            return template.answer;
+          }
+        }
+      }
+      // 3. Если ничего не найдено - общий ответ
+      const defaultAnswers = [
+        "Интересный вопрос. Дайте мне подумать...",
+        "Пока я не могу дать точный ответ на этот вопрос.",
+        "Моя текущая версия не знает ответа на это. Попробуйте задать вопрос иначе.",
+        "Я все еще учусь. Можете переформулировать вопрос?",
+        "К сожалению, это вне моей компетенции."
+      ];
+      return defaultAnswers[Math.floor(Math.random() * defaultAnswers.length)];
+    }
+
+    function sendMessage() {
+      const message = userInput.value.trim();
+      if (message === '') return;
+      addMessage(message, true);
+      userInput.value = '';
+      // Показываем индикатор набора
+      typingIndicator.style.display = 'flex';
+      // Имитируем задержку перед ответом
+      setTimeout(() => {
+        typingIndicator.style.display = 'none';
+        const aiResponse = findBestAnswer(message);
+        addMessage(aiResponse, false);
+      }, 1000 + Math.random() * 1500);
+    }
+    // Обработчики событий
+    sendButton.addEventListener('click', sendMessage);
+    userInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+    // Инициализация при загрузке
+    window.addEventListener('DOMContentLoaded', () => {
+      initTemplates();
+      // Анимация при прокрутке
+      const animateOnScroll = () => {
+        const elements = document.querySelectorAll('.template-card, .demo-card');
+        elements.forEach(element => {
+          const elementPosition = element.getBoundingClientRect().top;
+          const screenPosition = window.innerHeight / 1.3;
+          if (elementPosition < screenPosition) {
+            element.style.opacity = '1';
+            element.style.transform = 'translateY(0)';
+          }
+        });
+      };
+      // Инициализация анимации
+      document.querySelectorAll('.template-card, .demo-card').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'all 0.6s ease';
+      });
+      setTimeout(animateOnScroll, 200);
+      window.addEventListener('scroll', animateOnScroll);
+    });
+  </script>
+</body>
+
+</html>
